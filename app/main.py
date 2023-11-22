@@ -6,23 +6,37 @@ import pandas as pd
 
 app = FastAPI()
 
-# Carregar o modelo treinado
-model_path = "../model/modelo_treinado.joblib"
+# Carregar o modelo treinado e o encoder
+model_path = "modelo_treinado.joblib"
+encoder_path = "encoder.joblib"
 loaded_model = joblib.load(model_path)
+loaded_encoder = joblib.load(encoder_path)
 
 class Item(BaseModel):
-    # Definir a estrutura da entrada da API (pode variar dependendo do seu caso)
-    feature1: float
-    feature2: float
-    # Adicionar mais features conforme necessário
+    age: int
+    sex: int
+    cp: int
+    trestbps: int
+    chol: int
+    fbs: int
+    restecg: int
+    thalach: int
+    exang: int
+    oldpeak: float
+    slope: int
+    ca: int
+    thal: int
 
 @app.post("/predict")
 async def predict(item: Item):
-    # Converter os dados de entrada em um DataFrame
-    input_data = pd.DataFrame([item.dict()])
+    # Criar um DataFrame com os novos dados
+    new_data = pd.DataFrame([item.dict()])
+
+    # Codificar variáveis categóricas usando o encoder treinado
+    X_encoded = loaded_encoder.transform(new_data)
 
     # Fazer a predição
-    prediction = loaded_model.predict(input_data)
+    prediction = loaded_model.predict(X_encoded)
 
     # Retornar o resultado da predição
     return {"prediction": int(prediction[0])}
