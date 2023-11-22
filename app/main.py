@@ -13,19 +13,19 @@ loaded_model = joblib.load(model_path)
 loaded_encoder = joblib.load(encoder_path)
 
 class Item(BaseModel):
-    age: int
-    sex: int
-    cp: int
-    trestbps: int
-    chol: int
-    fbs: int
-    restecg: int
-    thalach: int
-    exang: int
-    oldpeak: float
-    slope: int
-    ca: int
-    thal: int
+    age: int = 63
+    sex: int = 1
+    cp: int = 3
+    trestbps: int = 145
+    chol: int = 233
+    fbs: int = 1
+    restecg: int = 0
+    thalach: int = 150
+    exang: int = 0
+    oldpeak: float = 2.3
+    slope: int = 0
+    ca: int = 0
+    thal: int = 1
 
 @app.post("/predict")
 async def predict(item: Item):
