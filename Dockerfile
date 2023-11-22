@@ -5,17 +5,17 @@ FROM python:3.8 AS builder
 # Copiar os arquivos necessários
 COPY requirements.txt .
 COPY app app
-COPY model model
+COPY model app
 
 # Instalar as dependências
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Estágio 2: Execução
-FROM python:3.8-slim
+# # Estágio 2: Execução
+# FROM python:3.8-slim
 
-# Copiar a partir do estágio de construção
-COPY --from=builder /usr/local/lib/python3.8/site-packages /usr/local/lib/python3.8/site-packages
-COPY --from=builder /app /app
+# # Copiar a partir do estágio de construção
+# COPY --from=builder /usr/local/lib/python3.8/site-packages /usr/local/lib/python3.8/site-packages
+# COPY --from=builder /app /app
 
 # Definir o diretório de trabalho para /app
 WORKDIR /app
