@@ -19,7 +19,7 @@ Criar uma imagem docker com o modelo, utilizando multi-steps
 Como Buildar sua imagem para teste local
 
 ```
-docker build -t dev-model .
+docker build --no-cache -t dev-model .
 docker run -p 8000:8000 dev-model
 ```
 

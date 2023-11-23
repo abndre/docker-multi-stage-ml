@@ -32,5 +32,5 @@ print(f"Acurácia do modelo: {accuracy}")
 
 # Salvar o modelo treinado
 # dump(model, f'./model/acc={accuracy:.4f}/modelo_treinado.joblib')
-dump(model, f'./model/modelo_treinado.joblib')
+dump(model, f'./model/modelo_treinado.joblib',protocol=4)  # protocol=4 é a versão mais recente do joblib
 dump(encoder, './model/encoder.joblib')
